@@ -6,7 +6,6 @@ from google_api_call import google_read
 
 def main():
     """Gets all addons from the spreadsheet and compares upload dates against live dates.
-    Hi mom, I'm doing it!
     """
     spreadsheet_id = '1FF2AMBdi8GQSKecYbeGA_tQEB3XhH-QXG0xTegqvxks'
     spreadsheet_source = 'Tested!A2:E'
@@ -54,8 +53,8 @@ def main():
 
     print('Done checking the spreadsheet.')
 
-    if __name__ == '__main__':
-        main()
+if __name__ == '__main__':
+    main()
 
     '''
     url = 'https://www.curseforge.com/wow/addons/buffwatch-classic/files'
