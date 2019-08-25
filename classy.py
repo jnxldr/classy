@@ -1,3 +1,11 @@
+"""This script references a Google Sheet with a list of addons for WoW Classic and compares the stored information
+against the latest avaiable online.
+
+The date of the latest upload of the addon to the repository is used to determine whether the stored information is
+out of date. If a difference between the stored and live information is found, the addon's information is printed.
+
+"""
+
 import tldextract
 
 from azeroth import get_curse, get_wowi, get_github
@@ -5,8 +13,6 @@ from google_api_call import google_read
 
 
 def main():
-    """Gets all addons from the spreadsheet and compares upload dates against live dates.
-    """
     spreadsheet_id = '1FF2AMBdi8GQSKecYbeGA_tQEB3XhH-QXG0xTegqvxks'
     spreadsheet_source = 'Tested!A2:E'
 
