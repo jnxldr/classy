@@ -1,3 +1,9 @@
+"""This module provides several functions to get informmation about WoW Classic addons from websites.
+
+The library BeautifulSoup is used extensively to scrape the HTML for the desired information.
+
+"""
+
 import re
 from datetime import datetime
 
@@ -6,6 +12,22 @@ from bs4 import BeautifulSoup
 
 
 def get_curse(url):
+    """Returns information about WoW Classic addons from Curseforge.
+
+    Two Try-Except blocks are used to account for formatting differences on addon pages,
+    depending on whether an addon is Classic only or if it also has a Retail version.
+    We're looking for instances of a string '1.13.2', the Classic build version,
+    then navigating the HTML tree to find the information we want.
+
+    Parameters:
+        url (str): URL of the main addon page
+
+    Returns:
+        addon_name (str): Name of the addon without version numbers
+        upload_date (str): Date of the latest addon update in YYYY-MM-DD format
+        download_path (str): URL for direct download of the latest addon update
+
+    """
     classic_version_files = url + '/all?filter-game-version=2020709689%3A7350'  # All 1.13.2 files only
     source = requests.get(classic_version_files).content
     soup = BeautifulSoup(source, 'html.parser')
@@ -59,6 +81,17 @@ def get_curse(url):
 
 
 def get_wowi(url):
+    """Returns information about WoW Classic addons from WoW Interface.
+
+    Parameters:
+        url (str): URL of the main addon page
+
+    Returns:
+        addon_name (str): Name of the addon without version numbers
+        upload_date (str): Date of the latest addon update in YYYY-MM-DD format
+        download_path (str): URL for direct download of the latest addon update
+
+    """
     source = requests.get(url).content
     soup = BeautifulSoup(source, 'html.parser')
 
@@ -81,6 +114,20 @@ def get_wowi(url):
 
 
 def get_github(url):
+    """Returns information about WoW Classic addons from Github.
+
+    We're looking for instances of a string 'Latest commit',
+    then navigating the HTML tree to find the information we want.
+
+    Parameters:
+        url (str): URL of the main addon page
+
+    Returns:
+        addon_name (str): Name of the addon without version numbers
+        upload_date (str): Date of the latest addon update in YYYY-MM-DD format
+        download_path (str): URL for direct download of the latest addon update
+
+    """
     source = requests.get(url).content
     soup = BeautifulSoup(source, 'html.parser')
 
