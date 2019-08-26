@@ -9,6 +9,9 @@ from datetime import datetime
 
 import requests
 from bs4 import BeautifulSoup
+import os.path
+from os import walk
+from os import listdir
 
 
 def get_curse(url):
@@ -150,3 +153,46 @@ def get_github(url):
     download_path = 'https://github.com' + path_table.get('href')
 
     return addon_name, upload_date, download_path
+
+
+def check_local_version():
+    """Goes through the local addon folder and reads the TOC's to get the addon versions.
+    Returns:
+        local_addon_name (str): Name of the addon according to the local files
+        local_addon_version (str): Version of the addon according to the local files
+
+    """
+    base_path = 'F:/Battle.net/World of Warcraft/_classic_beta_/Interface/AddOns'
+    if not os.path.exists(base_path):
+        print('No local addon folder found.')
+    else:
+        local_addons = listdir(base_path)
+        local_file_pair = []
+        for directory_name in local_addons:
+            directory_name = directory_name
+            addon_path = base_path + '/' + directory_name + '/'
+
+            for file in listdir(addon_path):
+                if file.endswith('.toc'):
+                    addon_toc = file
+                    toc_path = base_path + '/' + directory_name + '/' + addon_toc
+                    with open(toc_path) as fp:
+                        read_lines = fp.readlines()
+                        print(read_lines)
+        # local_file_pair.append([directory_name, file])
+        # print(local_file_pair)
+
+            # for root, directories, files in walk(base_path):
+            #     for file in files:
+            #         if file.endswith('.toc'):
+            #             local_toc = file
+            #             print(local_toc)
+
+        # local_addon_names = listdir(base_path)
+
+        # Use once in the directory
+        # for file in listdir(base_path):
+        #     if file.endswith('.toc'):
+        #         print(os.path.join(base_path, file))
+
+        return True
