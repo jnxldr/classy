@@ -163,7 +163,8 @@ def check_local_version():
         local_addon_version (str): Version of the addon according to the local files
 
     """
-    base_path = 'F:/Battle.net/World of Warcraft/_classic_beta_/Interface/AddOns'
+    # base_path = 'F:/Battle.net/World of Warcraft/_classic_/Interface/AddOns/'
+    base_path = 'D:/Documents/Coding/Python/4cram/Addons_Test/'
     if not os.path.exists(base_path):
         print('No local addon folder found.')
     else:
@@ -171,15 +172,26 @@ def check_local_version():
         local_file_pair = []
         for directory_name in local_addons:
             directory_name = directory_name
-            addon_path = base_path + '/' + directory_name + '/'
+            addon_path = base_path + directory_name + '/'
 
             for file in listdir(addon_path):
                 if file.endswith('.toc'):
                     addon_toc = file
-                    toc_path = base_path + '/' + directory_name + '/' + addon_toc
-                    with open(toc_path) as fp:
-                        read_lines = fp.readlines()
-                        print(read_lines)
+                    toc_path = base_path + directory_name + '/' + addon_toc
+                    with open(toc_path, encoding='UTF-8') as fp:
+                        read_lines = fp.read()
+                        regex = r'## Title\: [a-zA-Z0-9 ]+'
+                        pattern = re.compile(regex)
+                        matches = pattern.findall(str(read_lines))
+                        title_line = matches.replace('## Title: ', '')
+                        print(matches)
+
+                        local_file_pair.append([directory_name, matches])
+                        #print(read_lines, end='')
+
+        #print(local_file_pair)
+
+
         # local_file_pair.append([directory_name, file])
         # print(local_file_pair)
 
