@@ -47,8 +47,8 @@ def google_read(spreadsheet_id, spreadsheet_source):
 
 
 def google_write(spreadsheet_id, spreadsheet_target):
-    """Not Yet Implemented
-    Accesses the Classic Addons Google Sheets and returns the addon list.
+    """NOT YET IMPLEMENTED.
+    Updates the Last Upload date of an addon if the Stored Upload Date is older than the Live Upload Date.
     """
     creds = None
     # The file token.pickle stores the user's access and refresh tokens, and is

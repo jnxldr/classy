@@ -156,7 +156,8 @@ def get_github(url):
 
 
 def check_local_version():
-    """Goes through the local addon folder and reads the TOC's to get the addon versions.
+    """WORK IN PROGRESS
+    Goes through the local addon folder and reads the TOC's to get the addon versions.
     Returns:
         local_addon_name (str): Name of the addon according to the local files
         local_addon_version (str): Version of the addon according to the local files

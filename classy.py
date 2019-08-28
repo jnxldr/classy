@@ -14,7 +14,7 @@ from google_api_call import google_read
 
 def main():
     spreadsheet_id = '1FF2AMBdi8GQSKecYbeGA_tQEB3XhH-QXG0xTegqvxks'
-    spreadsheet_source = 'Tested!A2:E'
+    spreadsheet_source = 'Other Sources!A2:E'
 
     addon_list = google_read(spreadsheet_id, spreadsheet_source)
 
