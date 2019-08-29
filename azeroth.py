@@ -31,7 +31,7 @@ def get_curse(url):
         download_path (str): URL for direct download of the latest addon update
 
     """
-    classic_version_files = url + '/all?filter-game-version=2020709689%3A7350'  # All 1.13.2 files only
+    classic_version_files = url + '/files/all?filter-game-version=2020709689%3A7350'  # All 1.13.2 files only
     source = requests.get(classic_version_files).content
     soup = BeautifulSoup(source, 'html.parser')
 
