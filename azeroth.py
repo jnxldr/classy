@@ -165,6 +165,7 @@ def check_local_version():
     """
     # base_path = 'F:/Battle.net/World of Warcraft/_classic_/Interface/AddOns/'
     base_path = 'C:/Program Files (x86)/World of Warcraft/_classic_/Interface/AddOns/'
+    # base_path = 'C:/Users/jalexander/PycharmProjects/classy/AddonTest/'
     if not os.path.exists(base_path):
         print('No local addon folder found.')
     else:
@@ -180,19 +181,19 @@ def check_local_version():
                     toc_path = base_path + directory_name + '/' + addon_toc
                     with open(toc_path, encoding='UTF-8') as fp:
                         read_lines = fp.read()
-                        regex_title = r'## Title\: [a-zA-Z0-9_ ]+'
-                        regex_version = r'## Version\: .*'
-                        pattern_title = re.compile(regex_title)
+                        regex_version = r'## Version[ ]*\:[ ]*.*'
+                        # pattern_title = re.compile(regex_title)
                         pattern_version = re.compile(regex_version)
-                        matches_title = pattern_title.findall(str(read_lines))
+                        # matches_title = pattern_title.findall(str(read_lines))
                         matches_version = pattern_version.findall(str(read_lines))
-                        # if no version matched this should break and ignore the addon folder
-                        for title_line in matches_title:
-                            title = title_line[10:]
-                        for version_line in matches_version:
-                            version = version_line[12:]
+                        if not matches_version:
+                            print('No version found:', directory_name)
+                            break
+                        else:
+                            for version_line in matches_version:
+                                version = version_line[12:]
 
-                        local_file_pair.append((title, version))
+                        local_file_pair.append((directory_name, version))
         for x in local_file_pair:
             print(x)
 
