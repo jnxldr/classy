@@ -165,7 +165,7 @@ def check_local_version():
     """
     # base_path = 'F:/Battle.net/World of Warcraft/_classic_/Interface/AddOns/'
     base_path = 'C:/Program Files (x86)/World of Warcraft/_classic_/Interface/AddOns/'
-    # base_path = 'C:/Users/jalexander/PycharmProjects/classy/AddonTest/'
+
     if not os.path.exists(base_path):
         print('No local addon folder found.')
     else:
@@ -182,19 +182,16 @@ def check_local_version():
                     with open(toc_path, encoding='UTF-8') as fp:
                         read_lines = fp.read()
                         regex_version = r'## Version[ ]*\:[ ]*.*'
-                        # pattern_title = re.compile(regex_title)
                         pattern_version = re.compile(regex_version)
-                        # matches_title = pattern_title.findall(str(read_lines))
                         matches_version = pattern_version.findall(str(read_lines))
                         if not matches_version:
-                            print('No version found:', directory_name)
-                            break
+                            version = 'No version found'
                         else:
                             for version_line in matches_version:
-                                version = version_line[12:]
+                                version = version_line[12:].strip()
 
                         local_file_pair.append((directory_name, version))
-        for x in local_file_pair:
-            print(x)
+        # for x in local_file_pair:
+        #    print(x)
 
-        return True
+        return local_file_pair
